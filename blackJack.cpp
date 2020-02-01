@@ -24,7 +24,7 @@ void GetCard()
 {
 	for (int i = 0; i < 2; i++)
 	{
-		randomized = rand() % cards.capacity();
+		randomized = rand() % cards.size();
 		std::cout << " " << randomized;
 
 		std::move(cards.begin() + randomized, cards.begin() + randomized, playerCards.end());
@@ -32,7 +32,7 @@ void GetCard()
 
 		//playerCards.push_back(std::move(cards[randomized]));
 	}
-	for (auto i : playerCards)
+	for (auto i : cards)
 		std::cout << i << ' ';
 }
 
@@ -59,7 +59,4 @@ int main()
 
 #pragma region Later Use
 //system("CLS");
-
-// Deletes the second element (vec[1])
-//vec.erase(vec.begin() + 1);
 #pragma endregion
