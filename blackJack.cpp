@@ -25,7 +25,6 @@ void GetCard()
 	for (int i = 0; i < 2; i++)
 	{
 		randomized = rand() % cards.size();
-		std::cout << " " << randomized;
 
 		std::move(cards.begin() + randomized, cards.begin() + randomized, playerCards.end());
 
@@ -33,7 +32,10 @@ void GetCard()
 		//playerCards.push_back(std::move(cards[randomized]));
 	}
 	for (auto i : cards)
-		std::cout << i << ' ';
+		std::cout << "All cards: " << i << endl;
+
+	for (auto j : playerCards)
+		std::cout << "All player cards: " << j << endl;
 }
 
 int main()
