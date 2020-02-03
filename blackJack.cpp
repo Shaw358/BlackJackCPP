@@ -7,6 +7,8 @@
 #include <cstdlib>
 using namespace std;
 
+#pragma region Variables
+
 std::vector<int> cards;
 std::vector<int> playerCards;
 std::vector<int> dealerCards;
@@ -25,6 +27,19 @@ int DealerCardvalue = 0;
 bool dealerDone;
 bool dealerBusted;
 
+#pragma endregion
+
+void FillCardVector()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 2; j < 12; j++)
+		{
+			cards.push_back(j);
+		}
+	}
+}
+
 void Instructions()
 {
 	std::cout << "Hello " << playerName << endl;
@@ -37,12 +52,13 @@ void Instructions()
 	Sleep(1000);
 	std::cout << "Likewise the dealer also isn't allowed to go over 21" << endl;
 	Sleep(1000);
-	std::cout << "If someone hits a 21 he automatically wins, if both parties have 21 on their first stand the dealer wins" << endl;
+	std::cout << "If someone hits a 21 on their first draw he automatically wins, if both parties have 21 on their first draw the dealer wins" << endl;
 	Sleep(1000);
 	std::cout << "If no parties reach 21 before standing the party with the highest total score wins" << endl;
 	Sleep(1000);
 	std::cout << "Good luck!" << endl;
-	Sleep(1000);
+	std::cout << "Type anything to proceed" << endl;
+	std::cin >> playerInput;
 	system("CLS");
 }
 
@@ -85,20 +101,25 @@ void DealerTurn()
 		{
 			std::cout << "Dealer hand: " << DealerCardvalue << endl;
 			std::cout << "Dealer stands!" << endl;
-			Sleep(3000);
+			dealerDone = true;
+			Sleep(2000);
 			break;
 		}
 		else if (DealerCardvalue > 21)
 		{
 			dealerBusted = true;
+			dealerDone = true;
+			std::cout << "Your hand: " << PlayerCardValue << endl;
+			std::cout << "Dealer hand: " << DealerCardvalue << endl;
 			std::cout << "Dealer busted!" << endl;
-			Sleep(3000);
-			break;
+			Sleep(2000);
 		}
 		else if (DealerCardvalue > 17)
 		{
+			std::cout << "Your hand: " << PlayerCardValue << endl;
+			std::cout << "Dealer hand: " << DealerCardvalue << endl;
 			std::cout << "Dealer Stands!" << endl;
-			Sleep(3000);
+			Sleep(2000);
 			dealerDone = true;
 		}
 		else if (DealerCardvalue < PlayerCardValue)
@@ -107,25 +128,35 @@ void DealerTurn()
 			{
 				GetCard(1);
 				std::cout << "dealer hits" << endl;
-				Sleep(3000);
+				Sleep(2000);
+				std::cout << "Your hand: " << PlayerCardValue << endl;
+				std::cout << "Dealer hand: " << DealerCardvalue << endl;
+				Sleep(2000);
 			}
 			else
 			{
 				std::cout << "Dealer Stands!" << endl;
-				Sleep(3000);
+				Sleep(2000);
+				std::cout << "Your hand: " << PlayerCardValue << endl;
+				std::cout << "Dealer hand: " << DealerCardvalue << endl;
+				Sleep(2000);
 				dealerDone = true;
 			}
 		}
 		else
 		{
 			std::cout << "Dealer Stands!" << endl;
-			Sleep(3000);
+			Sleep(2000);
+			std::cout << "Your hand: " << PlayerCardValue << endl;
+			std::cout << "Dealer hand: " << DealerCardvalue << endl;
+			Sleep(2000);
 			dealerDone = true;
 		}
 
+		system("CLS");
 		std::cout << "Your hand: " << PlayerCardValue << endl;
 		std::cout << "Dealer hand: " << DealerCardvalue << endl;
-		Sleep(3000);
+		Sleep(2000);
 		if (dealerDone == true)
 		{
 			break;
@@ -134,37 +165,29 @@ void DealerTurn()
 	
 	if (PlayerCardValue > DealerCardvalue || dealerBusted == true)
 	{
-		bettedCredits * 2;
+		bettedCredits *= 2;
 		std::cout << "Player wins!\nCredits earned: " << bettedCredits << endl;
-		bettedCredits += credits;
-		Sleep(3000);
+		credits += bettedCredits;
+		Sleep(2000);
 	}
-	else if (PlayerCardValue < DealerCardvalue)
+	else if (PlayerCardValue < DealerCardvalue && dealerBusted == false)
 	{
 		std::cout << "You lost!" << endl;
-		Sleep(3000);
+		credits -= bettedCredits;
+		Sleep(2000);
 	}
 	else if (PlayerCardValue == DealerCardvalue) 
 	{
 		std::cout << "Push!";
-		bettedCredits += credits;
-	}
-}
-
-void FillCardVector()
-{
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 2; j < 12; j++)
-		{
-			cards.push_back(j);
-		}
+		Sleep(2000);
+		credits += bettedCredits;
 	}
 }
 
 int main()
 {
 	FillCardVector();
+	//Instructions();
 
 	while (playerName.empty())
 	{
@@ -176,27 +199,34 @@ int main()
 	{
 		dealerDone = false;
 		std::cout << "New Round!";
-		Sleep(1000);
+
+		PlayerCardValue = 0;
+		DealerCardvalue = 0;
+
+		playerCards.clear();
+		dealerCards.clear();
+
+		Sleep(2000);
 
 		while (true)
 		{
 			system("CLS");
+			std::cout << "Credits in account: " << credits << endl;
 			std::cout << "How much credits do wish to bet?" << endl;
 			std::cin >> playerInput;
 			bettedCredits = std::stoi(playerInput);
 			if (bettedCredits <= credits)
 			{
 				std::cout << bettedCredits << " in the game" << endl;
-				Sleep(1000);
+				Sleep(2000);
 				break;
 			}
 			else
 			{
 				std::cout << "Not enough credits!" << endl;
-				Sleep(1000);
+				Sleep(2000);
 			}
 		}
-
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -206,37 +236,42 @@ int main()
 		if (PlayerCardValue == 21)
 		{
 			std::cout << "BlackJack!";
-			Sleep(1000);
+			Sleep(2000);
 			system("CLS");
-			break;
+			bettedCredits *= 2.5f;
+			credits += bettedCredits;
 		}
-
-		while (true)
+		else
 		{
-			system("CLS");
-			std::cout << "Your hand: " << PlayerCardValue << endl;
-			std::cout << "1: Draw an extra card \n2: Hold" << endl;
-
-			std::cin >> playerInput;
-			choice = stoi(playerInput);
-
-			if (choice == 1)
+			while (true)
 			{
-				GetCard(0);
-				if (PlayerCardValue > 21)
+				system("CLS");
+				std::cout << "Your hand: " << PlayerCardValue << endl;
+				std::cout << "1: Draw an extra card \n2: Hold" << endl;
+
+				std::cin >> playerInput;
+				choice = stoi(playerInput);
+
+				if (choice == 1)
 				{
-					std::cout << "Busted!" << endl;
-					Sleep(1000);
+					GetCard(0);
+					if (PlayerCardValue > 21)
+					{
+						std::cout << "Your hand: " << PlayerCardValue << endl;
+						std::cout << "Busted!" << endl;
+						Sleep(2000);
+						break;
+					}
+				}
+				else if (choice == 2)
+				{
+					std::cout << "Stand!" << endl;
+					Sleep(200);
+					std::cout << "Dealer turn" << endl;
+					Sleep(2000);
+					DealerTurn();
 					break;
 				}
-			}
-			else if (choice == 2)
-			{
-				std::cout << "Stand!" << endl;
-				Sleep(200);
-				std::cout << "Dealer turn" << endl;
-				Sleep(1000);
-				DealerTurn();
 			}
 		}
 	}
