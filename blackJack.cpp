@@ -83,6 +83,7 @@ void DealerTurn()
 
 		if (DealerCardvalue == 17)
 		{
+			std::cout << "Dealer hand: " << DealerCardvalue << endl;
 			std::cout << "Dealer stands!" << endl;
 			Sleep(3000);
 			break;
@@ -94,11 +95,18 @@ void DealerTurn()
 			Sleep(3000);
 			break;
 		}
+		else if (DealerCardvalue > 17)
+		{
+			std::cout << "Dealer Stands!" << endl;
+			Sleep(3000);
+			dealerDone = true;
+		}
 		else if (DealerCardvalue < PlayerCardValue)
 		{
-			if (DealerCardvalue < 17 && PlayerCardValue < 16)
+			if (DealerCardvalue < 17 && PlayerCardValue > 16)
 			{
 				GetCard(1);
+				std::cout << "dealer hits" << endl;
 				Sleep(3000);
 			}
 			else
