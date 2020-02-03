@@ -42,23 +42,25 @@ void FillCardVector()
 
 void Instructions()
 {
+	system("CLS");
 	std::cout << "Hello " << playerName << endl;
-	Sleep(1000);
+	cin.ignore();
 	std::cout << "I am here to quickly explaint to you how blackjack works" << endl;
-	Sleep(1000);
+	std::cout << "Press enter to proceed" << endl;
+	cin.ignore();
 	std::cout << "You are playing to get a total card value of 21" << endl;
-	Sleep(1000);
+	cin.ignore();
 	std::cout << "If you exceed this number, you lose" << endl;
-	Sleep(1000);
+	cin.ignore();
 	std::cout << "Likewise the dealer also isn't allowed to go over 21" << endl;
-	Sleep(1000);
+	cin.ignore();
 	std::cout << "If someone hits a 21 on their first draw he automatically wins, if both parties have 21 on their first draw the dealer wins" << endl;
-	Sleep(1000);
-	std::cout << "If no parties reach 21 before standing the party with the highest total score wins" << endl;
-	Sleep(1000);
+	cin.ignore();
+	std::cout << "If no parties reach 21 before standing, the party with the highest total score wins" << endl;
+	cin.ignore();
 	std::cout << "Good luck!" << endl;
-	std::cout << "Type anything to proceed" << endl;
-	std::cin >> playerInput;
+	std::cout << "Press enter to proceed" << endl;
+	cin.ignore();
 	system("CLS");
 }
 
@@ -85,13 +87,58 @@ void GetCard(unsigned short int player)
 	}
 }
 
+void endingScreens(int result)
+{
+	system("CLS");
+	switch (result)
+	{
+	case 0:
+		std::cout << "Your hand: " << PlayerCardValue << endl;
+		std::cout << "Dealer hand: " << DealerCardvalue << endl;
+		bettedCredits *= 2;
+		std::cout << "You win!\nCredits earned: " << bettedCredits << endl;
+		credits += bettedCredits;
+		Sleep(3000);
+		break;
+	case 1:
+		std::cout << "Your hand: " << PlayerCardValue << endl;
+		std::cout << "You lost!" << endl;
+		std::cout << "Credits lost: " << bettedCredits << endl;
+		credits -= bettedCredits;
+		Sleep(3000);
+		break;
+	case 2:
+		std::cout << "Push!" << endl;
+		std::cout << "Credits earned: 0 " << endl;
+		credits += bettedCredits;
+		Sleep(3000);
+		break;
+	case 5:
+		std::cout << "BlackJack!";
+		Sleep(2000);
+		system("CLS");
+		bettedCredits *= 2.5f;
+		std::cout << "Credits earned: " << bettedCredits << endl;
+		credits += bettedCredits;
+		Sleep(3000);
+		break;
+
+	}
+}
+
 void DealerTurn()
 {
+	system("CLS");
 	dealerBusted = false;
 	for (int i = 0; i < 2; i++)
 	{
 		GetCard(1);
 	}
+
+	std::cout << "Your hand: " << PlayerCardValue << endl;
+	std::cout << "Dealer hand: " << DealerCardvalue << endl;
+
+	Sleep(2000);
 
 	while (true)
 	{
@@ -124,8 +171,9 @@ void DealerTurn()
 		}
 		else if (DealerCardvalue < PlayerCardValue)
 		{
-			if (DealerCardvalue < 17 && PlayerCardValue > 16)
+			if (DealerCardvalue < 17 && PlayerCardValue > DealerCardvalue)
 			{
+				system("CLS");
 				GetCard(1);
 				std::cout << "dealer hits" << endl;
 				Sleep(2000);
@@ -162,42 +210,36 @@ void DealerTurn()
 			break;
 		}
 	}
-	
+
 	if (PlayerCardValue > DealerCardvalue || dealerBusted == true)
 	{
-		bettedCredits *= 2;
-		std::cout << "Player wins!\nCredits earned: " << bettedCredits << endl;
-		credits += bettedCredits;
-		Sleep(2000);
+		endingScreens(0);
 	}
 	else if (PlayerCardValue < DealerCardvalue && dealerBusted == false)
 	{
-		std::cout << "You lost!" << endl;
-		credits -= bettedCredits;
-		Sleep(2000);
+		endingScreens(1);
 	}
-	else if (PlayerCardValue == DealerCardvalue) 
+	else if (PlayerCardValue == DealerCardvalue)
 	{
-		std::cout << "Push!";
-		Sleep(2000);
-		credits += bettedCredits;
+		endingScreens(2);
 	}
 }
 
 int main()
 {
-	FillCardVector();
-	//Instructions();
-
 	while (playerName.empty())
 	{
 		std::cout << "Please enter your name" << endl;
 		std::cin >> playerName;
 	}
 
+	FillCardVector();
+	//Instructions();
+
 	while (true)
 	{
 		dealerDone = false;
+		system("CLS");
 		std::cout << "New Round!";
 
 		PlayerCardValue = 0;
@@ -215,8 +257,9 @@ int main()
 			std::cout << "How much credits do wish to bet?" << endl;
 			std::cin >> playerInput;
 			bettedCredits = std::stoi(playerInput);
-			if (bettedCredits <= credits)
+			if (bettedCredits <= credits && bettedCredits > 0)
 			{
+				system("CLS");
 				std::cout << bettedCredits << " in the game" << endl;
 				Sleep(2000);
 				break;
@@ -235,11 +278,7 @@ int main()
 
 		if (PlayerCardValue == 21)
 		{
-			std::cout << "BlackJack!";
-			Sleep(2000);
-			system("CLS");
-			bettedCredits *= 2.5f;
-			credits += bettedCredits;
+			endingScreens(5);
 		}
 		else
 		{
@@ -257,9 +296,7 @@ int main()
 					GetCard(0);
 					if (PlayerCardValue > 21)
 					{
-						std::cout << "Your hand: " << PlayerCardValue << endl;
-						std::cout << "Busted!" << endl;
-						Sleep(2000);
+						endingScreens(1);
 						break;
 					}
 				}
