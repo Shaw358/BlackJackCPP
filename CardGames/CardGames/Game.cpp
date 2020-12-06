@@ -10,7 +10,8 @@ Game::~Game()
 }
 
 void Game::BlackJack()
-{/*
+{
+	/*
 	List of Functions:
 
 	Fill > fills the entire deck with Card classes and assigns values to them.
@@ -33,6 +34,8 @@ void Game::BlackJack()
 
 	askString > Insert a question in the parameter and ask [X player] for a string. [Allows for commands!]
 	*/
+
+#pragma region
 
 	deck.Fill();
 	deck.Shuffle();
@@ -61,7 +64,7 @@ void Game::BlackJack()
 		int highestAmount = 0;
 		for (int i = 0; i < players.size(); i++, currentPlayer++)
 		{
-			std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
+			std::cout << "Dealer: Player " << currentPlayer + 1 << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 
 			while (choiceInt != 1)
 			{
@@ -73,8 +76,9 @@ void Game::BlackJack()
 					if (players.at(currentPlayer)->getHand()->getBalance() > 21)
 					{
 						std::cout << "Dealer: player " << currentPlayer << " busted!" << std::endl;
+						choiceInt = 1;
 					}
-					std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
+					std::cout << "Dealer: Player " << currentPlayer + 1 << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 					break;
 				case 1:
 					if (players.at(currentPlayer)->getHand()->getBalance() > highestAmount)
@@ -92,6 +96,8 @@ void Game::BlackJack()
 			players.at(i)->getHand()->ClearHand();
 		}
 		dealer.GetPlayer()->getHand()->ClearHand();
+		std::cout << "Cock";
+		currentPlayer = 0;
 		system("CLS");
 	}
 }

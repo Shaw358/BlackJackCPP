@@ -1,5 +1,1 @@
-﻿  Game.cpp
-C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(49,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(62,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(90,21): warning C4018: '<': signed/unsigned mismatch
-  CardGames.vcxproj -> C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\Debug\CardGames.exe
+﻿  CardGames.vcxproj -> C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\Debug\CardGames.exe

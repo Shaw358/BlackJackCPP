@@ -24,7 +24,6 @@ void Deck::DrawCard(Player* aPlayer, int anAmount = 1)
 			remainingCards.erase(remainingCards.begin());
 		}
 	}
-	std::cout << remainingCards[0]->GetValue();
 }
 
 void Deck::Fill()
@@ -44,7 +43,7 @@ void Deck::Fill()
 void Deck::Shuffle()
 {
 	srand(time(0));
-	randomInt = rand() % remainingCards.size();
+	//randomInt = rand() % remainingCards.size();
 	std::random_shuffle(remainingCards.begin(), remainingCards.end());
 }
 
@@ -55,5 +54,3 @@ void Deck::ShowRemainingCards()
 		std::cout << v->GetValue() << "\n";
 	}
 }
-
-

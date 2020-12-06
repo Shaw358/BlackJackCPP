@@ -33,7 +33,6 @@ int Dealer::DealerTurn(int PlayerCardValue)
 		deck.DrawCard(player, 1);
 	}
 
-	std::cout << "Your hand: " << PlayerCardValue << std::endl;
 	std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
 
 	Sleep(2000);
@@ -51,7 +50,6 @@ int Dealer::DealerTurn(int PlayerCardValue)
 		}
 		else if (dealerCardvalue > 21)
 		{
-			std::cout << "Your hand: " << PlayerCardValue << std::endl;
 			std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
 			std::cout << "Dealer busted!" << std::endl;
 			Sleep(2000);
@@ -59,7 +57,6 @@ int Dealer::DealerTurn(int PlayerCardValue)
 		}
 		else if (dealerCardvalue > 17)
 		{
-			std::cout << "Your hand: " << PlayerCardValue << std::endl;
 			std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
 			std::cout << "Dealer Stands!" << std::endl;
 			Sleep(2000);
