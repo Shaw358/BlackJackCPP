@@ -10,8 +10,11 @@ public:
 	Hand* getHand();
 	int getBalance();
 	void setBalance(int anAmount);
+	void setBusted(bool newValue);
+	bool getBusted();
 
 private:
 	int balance;
 	Hand* hand;
+	bool isBusted;
 };

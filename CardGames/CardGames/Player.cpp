@@ -23,3 +23,13 @@ void Player::setBalance(int anAmount)
 {
 
 }
+
+void Player::setBusted(bool newValue)
+{
+	isBusted = newValue;
+}
+
+bool Player::getBusted()
+{
+	return isBusted;
+}

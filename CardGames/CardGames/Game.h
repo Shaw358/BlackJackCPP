@@ -1,8 +1,11 @@
 #pragma once
+#include<fstream> 
+
 #include <windows.h>
 #include "Deck.h"
 #include "IO.h"
 #include "Dealer.h"
+#include "EndGameScreen.h"
 
 class Game
 {
@@ -11,6 +14,7 @@ public:
 	~Game();
 
 	void BlackJack();
+	void PlayMusic();
 private:
 	int currentPlayer = 0;
 	Deck deck;
@@ -20,6 +24,7 @@ private:
 	int choiceInt;
 	bool choiceBool;
 	Dealer dealer;
+	EndGameScreen endGameScreen;
 
 	std::vector<Player*> players;
 };

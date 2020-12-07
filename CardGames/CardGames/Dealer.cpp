@@ -4,9 +4,8 @@
 #include "InputEnum.h"
 #include <synchapi.h>
 
-Dealer::Dealer()
+Dealer::Dealer() :player(new Player())
 {
-	player = new Player();
 }
 
 Dealer::~Dealer()
@@ -25,73 +24,66 @@ void Dealer::SetDeck(Deck newDeck)
 
 int Dealer::DealerTurn(int PlayerCardValue)
 {
-	std::cout << player;
+	std::cout << "Dealers turn...";
+	Sleep(2000);
 	system("CLS");
-	bool dealerBusted = false;
-	for (int i = 0; i < 2; i++)
-	{
-		deck.DrawCard(player, 1);
-	}
 
-	std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
+	deck.DrawCard(player, 2);
 
+	std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 	Sleep(2000);
 
 	while (true)
 	{
 		system("CLS");
 
-		if (dealerCardvalue == 17)
+		if (GetPlayer()->getHand()->getBalance() == 17)
 		{
-			std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
+			std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 			std::cout << "Dealer stands!" << std::endl;
 			Sleep(2000);
-			return dealerCardvalue;
+			return GetPlayer()->getHand()->getBalance();
 		}
-		else if (dealerCardvalue > 21)
+		else if (GetPlayer()->getHand()->getBalance() > 21)
 		{
-			std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
+			std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 			std::cout << "Dealer busted!" << std::endl;
 			Sleep(2000);
-			return dealerCardvalue;
+			return GetPlayer()->getHand()->getBalance();
 		}
-		else if (dealerCardvalue > 17)
+		else if (GetPlayer()->getHand()->getBalance() > 17)
 		{
-			std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
+			std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 			std::cout << "Dealer Stands!" << std::endl;
 			Sleep(2000);
-			return dealerCardvalue;
+			return GetPlayer()->getHand()->getBalance();
 		}
-		else if (dealerCardvalue < PlayerCardValue)
+		else if (GetPlayer()->getHand()->getBalance() < PlayerCardValue)
 		{
-			if (dealerCardvalue < 17 && PlayerCardValue > dealerCardvalue)
+			if (GetPlayer()->getHand()->getBalance() < 17 && PlayerCardValue > GetPlayer()->getHand()->getBalance())
 			{
 				deck.DrawCard(player, 1);
 				std::cout << "dealer hits" << std::endl;
-				Sleep(2000);
-				std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
+				std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 				Sleep(2000);
 			}
 			else
 			{
 				std::cout << "Dealer Stands!" << std::endl;
+				std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 				Sleep(2000);
-				std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
-				Sleep(2000);
-				return dealerCardvalue;
+				return GetPlayer()->getHand()->getBalance();
 			}
 		}
 		else
 		{
 			std::cout << "Dealer Stands!" << std::endl;
+			std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 			Sleep(2000);
-			std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
-			Sleep(2000);
-			return dealerCardvalue;
+			return GetPlayer()->getHand()->getBalance();
 		}
-
 		system("CLS");
-		std::cout << "Dealer hand: " << dealerCardvalue << std::endl;
+		std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 		Sleep(2000);
 	}
 }

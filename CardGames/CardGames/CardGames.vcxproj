@@ -144,6 +144,7 @@
     <ClCompile Include="CardType.cpp" />
     <ClCompile Include="Dealer.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="EndGameScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="InputEnum.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="CardType.h" />
     <ClInclude Include="Dealer.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="EndGameScreen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="InputEnum.h" />

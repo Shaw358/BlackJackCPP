@@ -19,7 +19,7 @@ void Deck::DrawCard(Player* aPlayer, int anAmount = 1)
 	if (remainingCards.size() > 0)
 	{
 		std::move(remainingCards.begin(), remainingCards.begin() + anAmount, std::back_inserter(*aPlayer->getHand()->getCards()));
-		for (int i = 0; i< anAmount; i++)
+		for (int i = 0; i < anAmount; i++)
 		{
 			remainingCards.erase(remainingCards.begin());
 		}

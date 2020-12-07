@@ -39,32 +39,36 @@ void Game::BlackJack()
 
 	deck.Fill();
 	deck.Shuffle();
-	deck.ShowRemainingCards();
+	//deck.ShowRemainingCards();
 
 	choiceInt = io.AskInt("How many players will be participating?", 2);
 
-	for (int i = 0; i < choiceInt + 1; i++)
+	for (int i = 0; i < choiceInt; i++)
 	{
 		players.push_back(new Player());
 	}
-
-	//start cards
-	for (int i = 0; i < players.size(); i++, currentPlayer++)
-	{
-		deck.DrawCard(players.at(currentPlayer), 2);
-	}
+	
+	dealer.SetDeck(deck);
 
 	currentPlayer = 0;
 	choiceInt = 0;
 
-#pragma endregion setup phase end
+#pragma endregion setup phase
 
 	while (true)
 	{
 		int highestAmount = 0;
+
+		choiceInt = 0; 
 		for (int i = 0; i < players.size(); i++, currentPlayer++)
 		{
-			std::cout << "Dealer: Player " << currentPlayer + 1 << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
+			deck.DrawCard(players.at(currentPlayer), 2);
+		}
+		currentPlayer = 0;
+
+		for (int i = 0; i < players.size(); i++, currentPlayer++)
+		{
+			std::cout << "Player " << currentPlayer + 1 << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 
 			while (choiceInt != 1)
 			{
@@ -75,7 +79,8 @@ void Game::BlackJack()
 					deck.DrawCard(players.at(currentPlayer), 1);
 					if (players.at(currentPlayer)->getHand()->getBalance() > 21)
 					{
-						std::cout << "Dealer: player " << currentPlayer << " busted!" << std::endl;
+						std::cout << "Dealer: player " << currentPlayer + 1 << " busted!" << std::endl;
+						players.at(currentPlayer)->setBusted(true);
 						choiceInt = 1;
 					}
 					std::cout << "Dealer: Player " << currentPlayer + 1 << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
@@ -85,19 +90,44 @@ void Game::BlackJack()
 					{
 						highestAmount = players.at(currentPlayer)->getHand()->getBalance();
 					}
-					std::cout << "stand" << std::endl;
 					break;
 				}
 			}
+			Sleep(2000);
 		}
-		dealer.DealerTurn(highestAmount);
+
+		bool dealerCanPlay = false;
 		for (int i = 0; i < players.size(); i++)
 		{
+			if (players.at(i)->getBusted() == false)
+			{
+				dealerCanPlay = true;
+				break;
+			}
+		}
+		if (dealerCanPlay)
+		{
+			dealer.DealerTurn(highestAmount);
+			endGameScreen.ShowResults(dealer, players);
+		}
+
+		Sleep(1200);
+		system("CLS");
+		std::cout << "New Round" << std::endl;
+		Sleep(2000);
+		system("CLS");
+
+		for (int i = 0; i < players.size(); i++)
+		{
+			players.at(i)->setBusted(false);
 			players.at(i)->getHand()->ClearHand();
 		}
 		dealer.GetPlayer()->getHand()->ClearHand();
-		std::cout << "Cock";
 		currentPlayer = 0;
-		system("CLS");
 	}
+}
+
+void Game::PlayMusic()
+{
+
 }
