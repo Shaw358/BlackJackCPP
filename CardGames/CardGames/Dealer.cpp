@@ -17,18 +17,18 @@ Player* Dealer::GetPlayer()
 	return player;
 }
 
-void Dealer::SetDeck(Deck newDeck)
+void Dealer::SetDeck(Deck* newDeck)
 {
 	deck = newDeck;
 }
 
 int Dealer::DealerTurn(int PlayerCardValue)
 {
-	std::cout << "Dealers turn...";
+	std::cout << "Dealer's turn...";
 	Sleep(2000);
 	system("CLS");
 
-	deck.DrawCard(player, 2);
+	deck->DrawCard(player, 2);
 
 	std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 	Sleep(2000);
@@ -62,7 +62,7 @@ int Dealer::DealerTurn(int PlayerCardValue)
 		{
 			if (GetPlayer()->getHand()->getBalance() < 17 && PlayerCardValue > GetPlayer()->getHand()->getBalance())
 			{
-				deck.DrawCard(player, 1);
+				deck->DrawCard(player, 1);
 				std::cout << "dealer hits" << std::endl;
 				std::cout << "Dealer hand: " << GetPlayer()->getHand()->getBalance() << std::endl;
 				Sleep(2000);

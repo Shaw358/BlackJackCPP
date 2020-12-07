@@ -39,6 +39,7 @@ void Game::BlackJack()
 
 	deck.Fill();
 	deck.Shuffle();
+	dealer.SetDeck(&deck);
 	//deck.ShowRemainingCards();
 
 	choiceInt = io.AskInt("How many players will be participating?", 2);
@@ -48,9 +49,7 @@ void Game::BlackJack()
 		players.push_back(new Player());
 	}
 	
-	dealer.SetDeck(deck);
-
-	currentPlayer = 0;
+	int currentPlayer = 0;
 	choiceInt = 0;
 
 #pragma endregion setup phase
@@ -59,7 +58,7 @@ void Game::BlackJack()
 	{
 		int highestAmount = 0;
 
-		choiceInt = 0; 
+		choiceInt = 0;
 		for (int i = 0; i < players.size(); i++, currentPlayer++)
 		{
 			deck.DrawCard(players.at(currentPlayer), 2);
@@ -79,11 +78,11 @@ void Game::BlackJack()
 					deck.DrawCard(players.at(currentPlayer), 1);
 					if (players.at(currentPlayer)->getHand()->getBalance() > 21)
 					{
-						std::cout << "Dealer: player " << currentPlayer + 1 << " busted!" << std::endl;
+						std::cout << "Player " << currentPlayer + 1 << " busted!" << std::endl;
 						players.at(currentPlayer)->setBusted(true);
 						choiceInt = 1;
 					}
-					std::cout << "Dealer: Player " << currentPlayer + 1 << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
+					std::cout << "Player " << currentPlayer + 1 << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 					break;
 				case 1:
 					if (players.at(currentPlayer)->getHand()->getBalance() > highestAmount)
@@ -93,7 +92,8 @@ void Game::BlackJack()
 					break;
 				}
 			}
-			Sleep(2000);
+			choiceInt = 0;
+			Sleep(500);
 		}
 
 		bool dealerCanPlay = false;
@@ -108,13 +108,13 @@ void Game::BlackJack()
 		if (dealerCanPlay)
 		{
 			dealer.DealerTurn(highestAmount);
-			endGameScreen.ShowResults(dealer, players);
+			endGameScreen.ShowResults(&dealer, &players);
 		}
 
 		Sleep(1200);
 		system("CLS");
 		std::cout << "New Round" << std::endl;
-		Sleep(2000);
+		Sleep(1200);
 		system("CLS");
 
 		for (int i = 0; i < players.size(); i++)

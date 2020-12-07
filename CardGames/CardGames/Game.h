@@ -16,7 +16,6 @@ public:
 	void BlackJack();
 	void PlayMusic();
 private:
-	int currentPlayer = 0;
 	Deck deck;
 	IO io;
 	Player* player;

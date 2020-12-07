@@ -1,9 +1,6 @@
-﻿  EndGameScreen.cpp
-C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\EndGameScreen.cpp(20,20): warning C4018: '<': signed/unsigned mismatch
-  Game.cpp
-C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(63,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(69,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Game.cpp
+C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(62,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(68,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(100,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\CardGames\Game.cpp(120,21): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
   CardGames.vcxproj -> C:\Users\User\okeeeeeee\BlackJackCPP\CardGames\Debug\CardGames.exe

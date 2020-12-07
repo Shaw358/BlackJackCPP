@@ -51,6 +51,6 @@ void Deck::ShowRemainingCards()
 {
 	for (auto v : remainingCards)
 	{
-		std::cout << v->GetValue() << "\n";
+		std::cout << v->GetValue() << std::endl;
 	}
 }

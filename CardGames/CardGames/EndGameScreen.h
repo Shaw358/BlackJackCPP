@@ -11,7 +11,7 @@ public:
 	EndGameScreen();
 	~EndGameScreen();
 
-	void ShowResults(Dealer dealer, std::vector<Player*> players);
+	void ShowResults(Dealer* dealer, std::vector<Player*>* players);
 private:
 
 };
